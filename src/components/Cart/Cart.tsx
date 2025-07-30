@@ -27,7 +27,7 @@ const CartContainer = styled('div')<CartContainerProps>`
   width: 400px;
   height: 100vh;
   background-color: ${({ theme }) => theme.palette.common.white};
-  padding: 1rem;
+  padding: 2rem;
   transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
   transition: transform 0.2s ease-in;
   z-index: 1001;
