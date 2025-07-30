@@ -1,12 +1,16 @@
+export type Variants = {
+  size: string;
+  price: string;
+  priceAsNumber: number;
+};
+
 export type Product = {
   id: string;
   name: string;
   color: string;
   image: string;
   description: string;
-  price: string;
-  priceAsNumber: number;
-  sizes: string[];
+  variants: Variants[];
 };
 
 export const allProducts: Product[] = [
@@ -17,9 +21,11 @@ export const allProducts: Product[] = [
     color: 'Burgundy',
     description:
       'With the ever-enduring allure of a classic statement piece, Park is a sophisticated design in a harmony of alluring shades. Crafted from supremely soft New Zealand wool, the densely woven loops and hand-cut pile gives each piece a thick and plush texture—bringing an atmosphere of worldly elegance to modern homes.',
-    price: '$895.00',
-    priceAsNumber: 895,
-    sizes: ['5x8', '8x10', '9x12'],
+    variants: [
+      { size: '5x8', price: '$895.00', priceAsNumber: 895 },
+      { size: '8x10', price: '$1195', priceAsNumber: 1195 },
+      { size: '9x12', price: '$1395', priceAsNumber: 1395 },
+    ],
   },
   {
     id: '2',
@@ -28,9 +34,11 @@ export const allProducts: Product[] = [
     color: 'Beige',
     description:
       'With the ever-enduring allure of a classic statement piece, Park is a sophisticated design in a harmony of alluring shades. Crafted from supremely soft New Zealand wool, the densely woven loops and hand-cut pile gives each piece a thick and plush texture—bringing an atmosphere of worldly elegance to modern homes.',
-    price: '$895.00',
-    priceAsNumber: 895,
-    sizes: ['5x8', '8x10', '9x12'],
+    variants: [
+      { size: '5x8', price: '$895.00', priceAsNumber: 895 },
+      { size: '8x10', price: '$1195', priceAsNumber: 1195 },
+      { size: '9x12', price: '$1395', priceAsNumber: 1395 },
+    ],
   },
   {
     id: '3',
@@ -39,9 +47,11 @@ export const allProducts: Product[] = [
     color: 'Beige',
     description:
       'Raw bohemian textures are elevated with architectural lines in Boho, inspired by the limestone steps of grand stairs to historic Stockholm buildings. Crafted from all-natural, undyed European wool to a contemporary geometric pattern that combines a flat-woven canvas with lush hand-knotted pile.',
-    price: '$995.00',
-    priceAsNumber: 995,
-    sizes: ['4x6', '5x8', '6x9'],
+    variants: [
+      { size: '5x8', price: '$895.00', priceAsNumber: 895 },
+      { size: '8x10', price: '$1195', priceAsNumber: 1195 },
+      { size: '9x12', price: '$1395', priceAsNumber: 1395 },
+    ],
   },
   {
     id: '4',
@@ -50,9 +60,11 @@ export const allProducts: Product[] = [
     color: 'Gray',
     description:
       'Raw bohemian textures are elevated with architectural lines in Boho, inspired by the limestone steps of grand stairs to historic Stockholm buildings. Crafted from all-natural, undyed European wool to a contemporary geometric pattern that combines a flat-woven canvas with lush hand-knotted pile.',
-    price: '$495.00',
-    priceAsNumber: 495,
-    sizes: ['4x6', '5x8', '6x9'],
+    variants: [
+      { size: '5x8', price: '$895.00', priceAsNumber: 895 },
+      { size: '8x10', price: '$1195', priceAsNumber: 1195 },
+      { size: '9x12', price: '$1395', priceAsNumber: 1395 },
+    ],
   },
   // Add more products as needed
 ];

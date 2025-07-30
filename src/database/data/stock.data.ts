@@ -8,10 +8,10 @@ export type StockData = {
 
 export const stockData: StockData[] = allProducts
   .map((product) => {
-    return product.sizes.map((size) => {
+    return product.variants.map((variant) => {
       return {
         productId: product.id,
-        size,
+        size: variant.size,
         quantity: 4,
       };
     });

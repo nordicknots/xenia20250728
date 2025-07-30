@@ -39,11 +39,18 @@ type CartProviderProps = {
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = React.useState<Cart>(initialCart);
   const [cartOpen, setCartOpen] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   const addToCart = (product: Product, selectedSize: string) => {
     const existingItem = cart.items.find((item) =>
       isSameItem(item, product, selectedSize)
     );
+
+    const selectedVariant = product.variants.find(
+      (variant) => variant.size === selectedSize
+    );
+    const selectedPrice = selectedVariant?.priceAsNumber || 0;
+    const selectedPriceString = selectedVariant?.price || '';
 
     if (existingItem) {
       const updatedItems = cart.items.map((item) => ({
@@ -70,10 +77,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
             quantity: 1,
             product,
             size: selectedSize,
-            unitPriceAsNumber: product.priceAsNumber,
+            unitPriceAsString: selectedPriceString,
+            unitPriceAsNumber: selectedPrice,
           },
         ],
-        total: cart.total + product.priceAsNumber,
+        total: cart.total + selectedPrice,
       });
     }
   };
@@ -106,12 +114,15 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     const cartFromStorage = localStorage.getItem('cart');
     if (cartFromStorage) {
       setCart(JSON.parse(cartFromStorage));
+      setIsLoaded(true);
     }
   }, []);
 
   React.useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    if (isLoaded) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, isLoaded]);
 
   const cartContextValue = React.useMemo(
     () => ({

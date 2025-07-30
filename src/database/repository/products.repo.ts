@@ -5,5 +5,5 @@ export const getAllProducts = (): Product[] => {
 };
 
 export const getProductById = (id: string): Product | undefined => {
-  return allProducts.find((product) => product.id === '1');
+  return allProducts.find((product) => product.id === id);
 };
