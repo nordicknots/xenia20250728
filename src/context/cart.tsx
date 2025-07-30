@@ -46,6 +46,12 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       isSameItem(item, product, selectedSize)
     );
 
+    const selectedVariant = product.variants.find(
+      (variant) => variant.size === selectedSize
+    );
+    const selectedPrice = selectedVariant?.priceAsNumber || 0;
+    const selectedPriceString = selectedVariant?.price || '';
+
     if (existingItem) {
       const updatedItems = cart.items.map((item) => ({
         ...item,
@@ -71,10 +77,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
             quantity: 1,
             product,
             size: selectedSize,
-            unitPriceAsNumber: product.priceAsNumber,
+            unitPriceAsString: selectedPriceString,
+            unitPriceAsNumber: selectedPrice,
           },
         ],
-        total: cart.total + product.priceAsNumber,
+        total: cart.total + selectedPrice,
       });
     }
   };

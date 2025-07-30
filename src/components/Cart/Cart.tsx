@@ -73,7 +73,9 @@ export const Cart = () => {
               >
                 <CartItemContent>
                   <Typography fontWeight={600}>{item.product.name}</Typography>
-                  <Typography fontWeight={600}>{item.product.price}</Typography>
+                  <Typography fontWeight={600}>
+                    {item.unitPriceAsString}
+                  </Typography>
                 </CartItemContent>
                 <CartItemContent>
                   <Typography>Qty: {item.quantity}</Typography>
