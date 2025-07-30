@@ -39,11 +39,18 @@ const ProductDetails = styled('div')`
 `;
 
 export const Product = ({ product }: ProductProps) => {
-  const [selectedSize, setSelectedSize] = React.useState(product.sizes[0]);
+  const [selectedSize, setSelectedSize] = React.useState(
+    product.variants[0].size
+  );
+
   const [addingToCart, setAddingToCart] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
   const { addToCart, setCartOpen, itemCountInCart } = useCart();
+
+  const selectedVariant = product.variants.find(
+    (variant) => variant.size === selectedSize
+  );
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedSize(event.target.value);
@@ -92,7 +99,7 @@ export const Product = ({ product }: ProductProps) => {
             {product.name}
           </Typography>
           <Typography variant="h5" fontWeight={500}>
-            {product.price}
+            {selectedVariant?.price}
           </Typography>
         </Box>
 
@@ -107,9 +114,9 @@ export const Product = ({ product }: ProductProps) => {
             value={selectedSize}
             onChange={handleChange}
           >
-            {product.sizes.map((size) => (
-              <MenuItem key={size} value={size}>
-                {size}
+            {product.variants.map((variant) => (
+              <MenuItem key={variant.size} value={variant.size}>
+                {variant.size}
               </MenuItem>
             ))}
           </Select>
