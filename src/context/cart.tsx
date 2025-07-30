@@ -39,6 +39,7 @@ type CartProviderProps = {
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = React.useState<Cart>(initialCart);
   const [cartOpen, setCartOpen] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   const addToCart = (product: Product, selectedSize: string) => {
     const existingItem = cart.items.find((item) =>
@@ -106,12 +107,15 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     const cartFromStorage = localStorage.getItem('cart');
     if (cartFromStorage) {
       setCart(JSON.parse(cartFromStorage));
+      setIsLoaded(true);
     }
   }, []);
 
   React.useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    if (isLoaded) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, isLoaded]);
 
   const cartContextValue = React.useMemo(
     () => ({
