@@ -21,9 +21,13 @@ type ProductProps = {
 
 const ProductGrid = styled('section')`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 1rem;
   padding-inline: 2rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Media = styled('div')`
