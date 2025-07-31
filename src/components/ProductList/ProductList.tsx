@@ -4,8 +4,12 @@ import Link from 'next/link';
 
 const ProductListGrid = styled('section')`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 1rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 const ProductCard = styled(Link)`
@@ -13,7 +17,6 @@ const ProductCard = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  aspect-ratio: 3/4;
   text-decoration: none;
   transition: opacity 0.2s ease-in;
 
@@ -27,6 +30,7 @@ const Media = styled('div')`
   position: relative;
   width: 100%;
   height: 100%;
+  aspect-ratio: 3/4;
 `;
 
 export const ProductList = ({ products }: any) => {
@@ -50,7 +54,9 @@ export const ProductList = ({ products }: any) => {
             </Media>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography fontWeight={500}>{product.name}</Typography>
-              <Typography fontWeight={500}>{product.price}</Typography>
+              <Typography fontWeight={500}>
+                From {product.variants[0].price}
+              </Typography>
             </Box>
           </ProductCard>
         ))}
